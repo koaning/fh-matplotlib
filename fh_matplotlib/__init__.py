@@ -1,4 +1,8 @@
 from fasthtml.common import Img
+import matplotlib.pylab as plt
+import io
+import base64
+
 
 def matplotlib2fasthtml(func):
     '''
@@ -17,7 +21,7 @@ def matplotlib2fasthtml(func):
         plt.plot(np.arange(25), np.random.exponential(1, size=25))
     ```
     '''
-    def wrapper(func, *args, **kwargs):
+    def wrapper(*args, **kwargs):
         # Reset the figure to prevent accumulation. Maybe we need a setting for this?
         plt.figure()
 

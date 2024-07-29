@@ -30,6 +30,7 @@ def matplotlib_function():
 from fh_matplotlib import matplotlib2fasthtml
 from fasthtml.common import * 
 import numpy as np
+import matplotlib.pylab as plt
 
 app, rt = fast_app()  
 
@@ -59,7 +60,6 @@ def increment():
     global plotdata, count
     count += 1
     plotdata.append(np.random.exponential(1))
-    print(plotdata)
     return Div(
         generate_chart(),
         P(f"You have pressed the button {count} times."),
