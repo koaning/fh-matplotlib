@@ -39,6 +39,8 @@ def matplotlib2fasthtml(func):
         plt.savefig(my_stringIObytes, format='jpg')
         my_stringIObytes.seek(0)
         my_base64_jpgData = base64.b64encode(my_stringIObytes.read()).decode()
+
+        # Close the figure to prevent memory leaks
         plt.close(fig)
         plt.close('all')
         return Img(src=f'data:image/jpg;base64, {my_base64_jpgData}')
