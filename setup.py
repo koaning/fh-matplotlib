@@ -9,7 +9,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Vincent D. Warmerdam",
-    version="0.0.3",
+    version="0.0.4",
     packages=find_packages(),
     install_requires=["matplotlib", "python-fasthtml"],
     extras_require={
