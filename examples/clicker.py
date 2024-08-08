@@ -21,7 +21,7 @@ def home():
         H1("Matplotlib Demo"),
         P("Nothing too fancy, but still kind of fancy."),
         Div(f"You have pressed the button {count} times.", id="chart"),
-        Button("Increment", hx_get="/increment", hx_target="#chart", hx_swap="innerHTML"),
+        Button("Increment", hx_get="/increment/", hx_target="#chart", hx_swap="innerHTML"),
         style="margin: 20px"
     )
 
