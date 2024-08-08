@@ -1,7 +1,13 @@
+import matplotlib.pyplot
 from fasthtml.common import Img
 import matplotlib.pylab as plt
+import matplotlib
 import io
 import base64
+
+# This is necessary to prevent matplotlib from causing memory leaks
+# https://stackoverflow.com/questions/31156578/matplotlib-doesnt-release-memory-after-savefig-and-close
+matplotlib.use('Agg')
 
 
 def matplotlib2fasthtml(func):
@@ -23,7 +29,7 @@ def matplotlib2fasthtml(func):
     '''
     def wrapper(*args, **kwargs):
         # Reset the figure to prevent accumulation. Maybe we need a setting for this?
-        plt.figure()
+        fig = plt.figure()
 
         # Run function as normal
         func(*args, **kwargs)
@@ -33,6 +39,7 @@ def matplotlib2fasthtml(func):
         plt.savefig(my_stringIObytes, format='jpg')
         my_stringIObytes.seek(0)
         my_base64_jpgData = base64.b64encode(my_stringIObytes.read()).decode()
-        plt.close()
+        plt.close(fig)
+        plt.close('all')
         return Img(src=f'data:image/jpg;base64, {my_base64_jpgData}')
     return wrapper
